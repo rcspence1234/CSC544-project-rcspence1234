@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>Visualization of (k,t) spanners</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="data.js"></script>
+	<script src="dijkstra.js"></script>
+	<script src="prim.js"></script>
+	<script src="distance.js"></script>
+	
+	<script type="text/x-mathjax-config">
+	MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+	</script>
+	<script type="text/javascript"
+	src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+  </head>
+  
+  <style>
+  .legend rect {
+  fill:white;
+  stroke:black;
+  opacity:0.8;}
+  </style>
+  
+  <body>
+  <h1>Euclidean $(k,t)$-spanner</h1>
+  
+  <h2>Richard Spence</h2>
+  <h2> CSC 544 Fall 2017 </h2>
+  
+  <p>
+  Given a set $V$ of points in the plane and a constant $t \ge 1$, we define a Euclidean t-spanner of $V$ to be a graph $G(V,E)$ spanning the points in $V$ such that for all $u, v \in V$,
+  we have $d_G(u,v) \le t \cdot d(u,v)$ where $d_G()$ denotes the length of the shortest path in $G$ and $d()$ denotes the Euclidean distance between two points. Computing
+  a $t$-spanner of $G$ with minimum total length is NP-hard for any $t > 1$ (Carmi et al., 2013).
+  </p>
+  <p>
+  A reasonable variant is what I call a $(k,t)$-spanner: given a set $V$, a constant $t \ge 1$, and an integer $k \ge 1$, a $(k,t)$-spanner is a $t$-spanner with the additional property
+  that for all $u,v \in V$, there exists a path from $u$ to $v$ of length at most $t \cdot d(u,v)$ using no more than $k$ edges. Note that if $k = |V|-1$ then this reduces to the Euclidean $t$-spanner problem, and if $t$ is arbitrarily large then this reduces to the minimum spanning tree (MST)
+  problem.
+  </p>
+  <p>
+  The user can input a value of $k \ge 1$ and $t \ge 1$. "Compute approx. t-spanner" will run a very simple heuristic and compare to the cost of the MST.
+    <div>
+      <span id="kt-spanner"></span>
+	  <form name="k-parameter">
+            <input type="text" id="k" placeholder="Enter k">
+      </form>
+	  <form name="t-parameter">
+            <input type="text" id="t" placeholder="Enter t">
+      </form>
+    </div>
+	<br>
+  <div>
+  
+  <div id="table_1"></div>
+	<b>Table of generated (k,t)-spanners for |V| = 30</b>
+	<table id="table"  border="1" cellpadding="2">
+		<tr>
+		<td><b>k</b></td>
+		<td><b>t</b></td>
+		<td><b>|V|</b></td>
+		<td><b>|E|</b></td>
+		<td><b>Cost</b></td>
+		<td><b>MST Cost</b></td>
+		<td><b>Cost/MST Cost</b></td>
+		</tr>
+	</table>
+  <script src = "kt.js"></script>
+  <script src="buttons.js"></script>
+  </div>
+  </body>
+ </html>
